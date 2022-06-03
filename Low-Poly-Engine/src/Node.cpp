@@ -2,7 +2,7 @@
 
 Node::Node() : parent(nullptr)
 {
-	
+
 }
 
 Node::~Node()
