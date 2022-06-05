@@ -2,9 +2,10 @@
 
 #include <iostream>
 
-Application::Application()
+Application::Application(int window_width, int window_height, std::string title)
+	: window_width(window_width), window_height(window_height), title(title), window(nullptr)
 {
-	this->window = nullptr;
+
 }
 
 Application::~Application()
@@ -14,10 +15,17 @@ Application::~Application()
 
 void Application::Loop()
 {
-	displays.push_back(Display(0, 0, 200, 200));
-	displays.push_back(Display(200, 0, 200, 200));
-	displays.push_back(Display(200, 200, 200, 200));
-	displays.push_back(Display(0, 200, 200, 200));
+	displays.push_back(
+		Display(0, 0, GetWindowWidth() / 2, GetWindowHeight() / 2));
+
+	displays.push_back(
+		Display(GetWindowWidth() / 2, GetWindowHeight() / 2, GetWindowWidth() / 2, GetWindowHeight() / 2));
+
+	displays.push_back(
+		Display(GetWindowWidth() / 2, 0, GetWindowWidth() / 2, GetWindowHeight() / 2));
+
+	displays.push_back(
+		Display(0, GetWindowHeight() / 2, GetWindowWidth() / 2, GetWindowHeight() / 2));
 
 	while (!glfwWindowShouldClose(this->window)) {
 		this->Update();
@@ -35,7 +43,7 @@ void Application::Render()
 {
 	/* Render here */
 	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(backgroud_color);
+	glClearColor(background_color);
 
 	for (auto& d : displays) {
 		d.SetDisplay();
@@ -66,7 +74,7 @@ bool Application::Init()
 		return false;
 
 	/* Create a windowed mode window and its OpenGL context */
-	this->window = glfwCreateWindow(640, 480, "Low-Poly Engine", NULL, NULL);
+	this->window = glfwCreateWindow(window_width, window_height, title.c_str(), NULL, NULL);
 	if (!this->window)
 	{
 		glfwTerminate();
@@ -82,4 +90,14 @@ bool Application::Init()
 
 	return true;
 
+}
+
+void Application::SetBackgroundColor(const COLOR::RGB_f& color)
+{
+	background_color = color;
+}
+
+const COLOR::RGB_f Application::GetBackgroundColor() const
+{
+	return background_color;
 }
