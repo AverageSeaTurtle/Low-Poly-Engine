@@ -5,10 +5,14 @@
 class Camera : public Node
 {
 public:
-
 	Camera();
 	~Camera();
 
-private:
+	void SetCamera();
 
+private:
+	virtual void Update();
+
+	Vector3D focal_point;
+	Vector3D up_direction;
 };

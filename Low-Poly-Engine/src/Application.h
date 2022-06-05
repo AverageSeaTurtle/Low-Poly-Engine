@@ -3,6 +3,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "Display.h"
+#include <vector>
+
 class Application
 {
 public:
@@ -13,6 +16,8 @@ public:
 
 	bool Init();
 
+	COLOR::RGB_f backgroud_color;
+
 private:
 
 	void Update();
@@ -20,5 +25,7 @@ private:
 	void Render();
 
 	GLFWwindow* window;
+
+	std::vector<Display> displays;
 
 };

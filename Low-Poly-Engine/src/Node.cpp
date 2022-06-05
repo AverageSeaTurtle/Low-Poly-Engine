@@ -13,7 +13,6 @@ Node::~Node()
 
 void Node::Update()
 {
-	std::cout << position << std::endl;
 	for (auto& n : children)
 		n->Update();
 }
@@ -28,6 +27,11 @@ void Node::AddChildNode(Node& node)
 {
 	children.push_back(&node);
 	node.SetParentNode(*this);
+}
+
+Node& Node::GetChildNode(int index)
+{
+	return *children[index];
 }
 
 Node& Node::GetParentNode()

@@ -119,6 +119,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="low-poly-engine\src\Application.cpp" />
+    <ClCompile Include="Low-Poly-Engine\src\Camera.cpp" />
+    <ClCompile Include="Low-Poly-Engine\src\Color.cpp" />
+    <ClCompile Include="Low-Poly-Engine\src\Display.cpp" />
     <ClCompile Include="low-poly-engine\src\Main.cpp" />
     <ClCompile Include="low-poly-engine\src\Node.cpp" />
     <ClCompile Include="low-poly-engine\src\Vector3D.cpp" />
@@ -133,6 +136,8 @@
     <ClInclude Include="dependencies\glfw\include\glfw\glfw3native.h" />
     <ClInclude Include="low-poly-engine\src\Application.h" />
     <ClInclude Include="low-poly-engine\src\Camera.h" />
+    <ClInclude Include="Low-Poly-Engine\src\Color.h" />
+    <ClInclude Include="Low-Poly-Engine\src\Display.h" />
     <ClInclude Include="low-poly-engine\src\Node.h" />
     <ClInclude Include="low-poly-engine\src\Vector3D.h" />
     <ClInclude Include="low-poly-engine\src\Viewport.h" />

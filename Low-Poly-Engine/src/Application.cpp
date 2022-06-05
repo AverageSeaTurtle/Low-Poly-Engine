@@ -14,6 +14,11 @@ Application::~Application()
 
 void Application::Loop()
 {
+	displays.push_back(Display(0, 0, 200, 200));
+	displays.push_back(Display(200, 0, 200, 200));
+	displays.push_back(Display(200, 200, 200, 200));
+	displays.push_back(Display(0, 200, 200, 200));
+
 	while (!glfwWindowShouldClose(this->window)) {
 		this->Update();
 		this->Render();
@@ -30,16 +35,22 @@ void Application::Render()
 {
 	/* Render here */
 	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(backgroud_color);
 
-	/* ---- Draw here ---- */
-	glBegin(GL_TRIANGLES);
+	for (auto& d : displays) {
+		d.SetDisplay();
 
-	glVertex2f(-0.5f, -0.5f);
-	glVertex2f(0.0f, 0.5f);
-	glVertex2f(0.5f, -0.5f);
+		/* ---- Draw here ---- */
+		glBegin(GL_TRIANGLES);
 
-	glEnd();
-	/* ------------------- */
+		glVertex2f(-0.5f, -0.5f);
+		glVertex2f(0.0f, 0.5f);
+		glVertex2f(0.5f, -0.5f);
+
+		glEnd();
+		/* ------------------- */
+
+	}
 
 	/* Swap front and back buffers */
 	glfwSwapBuffers(this->window);

@@ -13,9 +13,11 @@ public:
 	virtual void Render();
 
 	Vector3D position;
+	Vector3D rotation;
 
 	void AddChildNode(Node& node);
-
+	
+	Node& GetChildNode(int index);
 	Node& GetParentNode();
 
 protected:
