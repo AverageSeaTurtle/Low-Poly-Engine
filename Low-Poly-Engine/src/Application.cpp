@@ -1,6 +1,7 @@
 #include "Application.h"
 
 #include <iostream>
+#include "Shader.h"
 
 Application::Application(int window_width, int window_height, std::string title)
 	: window_width(window_width), window_height(window_height), title(title), window(nullptr)
@@ -27,10 +28,16 @@ void Application::Loop()
 	displays.push_back(
 		Display(0, GetWindowHeight() / 2, GetWindowWidth() / 2, GetWindowHeight() / 2));
 
+	SHADER::ShaderProgramSource source = SHADER::ParseShader("res/shaders/Basic.shader");
+	unsigned int shader = SHADER::CreateShader(source.VertexSource, source.FragmentSource);
+	glUseProgram(shader);
+
 	while (!glfwWindowShouldClose(this->window)) {
 		this->Update();
 		this->Render();
 	}
+
+	glDeleteProgram(shader);
 }
 
 void Application::Update()

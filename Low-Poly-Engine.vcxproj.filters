@@ -39,6 +39,9 @@
     <ClCompile Include="Low-Poly-Engine\src\Color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Low-Poly-Engine\src\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dependencies\glew\include\gl\eglew.h">
@@ -80,5 +83,11 @@
     <ClInclude Include="Low-Poly-Engine\src\Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Low-Poly-Engine\src\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Low-Poly-Engine\res\shaders\Basic.shader" />
   </ItemGroup>
 </Project>
