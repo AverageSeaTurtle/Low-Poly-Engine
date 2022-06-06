@@ -3,6 +3,9 @@
 #include <GLFW/glfw3.h>
 
 #define glClearColor(COLOR) glClearColor(COLOR.r, COLOR.g, COLOR.b, COLOR.alpha);
+#define glColor3f(COLOR) glColor3f(COLOR.r, COLOR.g, COLOR.b);
+
+#define WHITE_COLOR COLOR::RGB_f(1.0,1.0,1.0)
 
 namespace COLOR
 {
