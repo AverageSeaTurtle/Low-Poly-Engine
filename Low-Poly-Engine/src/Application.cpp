@@ -28,9 +28,12 @@ void Application::Loop()
 	displays.push_back(
 		Display(0, GetWindowHeight() / 2, GetWindowWidth() / 2, GetWindowHeight() / 2));
 
+	/* Set up Basic Shader */
 	SHADER::ShaderProgramSource source = SHADER::ParseShader("res/shaders/Basic.shader");
 	unsigned int shader = SHADER::CreateShader(source.VertexSource, source.FragmentSource);
 	glUseProgram(shader);
+
+	//int shader_color = glGetUniformLocation(shader, "u_Color");
 
 	while (!glfwWindowShouldClose(this->window)) {
 		this->Update();
@@ -50,7 +53,7 @@ void Application::Render()
 {
 	/* Render here */
 	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(background_color);
+	//glClearColor(background_color);
 
 	for (auto& d : displays) {
 		d.SetDisplay();
@@ -90,6 +93,8 @@ bool Application::Init()
 
 	/* Make the window's context current */
 	glfwMakeContextCurrent(this->window);
+
+	glfwSwapInterval(1);
 
 	/* Initialize Glew (it needs to be initialized before a context)*/
 	if (glewInit() != GLEW_OK)
