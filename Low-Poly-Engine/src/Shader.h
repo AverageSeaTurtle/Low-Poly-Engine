@@ -18,18 +18,26 @@ https://youtu.be/2pv0Fbo-7ms
 #include <fstream>
 #include <sstream>
 
-namespace SHADER
+class Shader
 {
-	struct ShaderProgramSource
-	{
-		std::string VertexSource;
-		std::string FragmentSource;
-	};
+public:
+
+	Shader(const std::string& filepath);
+	~Shader();
+
+	void UseProgram();
+	void DeleteProgram();
+
+	unsigned int getProgram() const { return program; }
+
+private:
 
 	unsigned int CompileShader(unsigned int type, const std::string& source);
+	void CreateShader();
+	void ParseShader();
 
-	unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
-
-	ShaderProgramSource ParseShader(const std::string& filepath);
-	
-}
+	std::string filepath;
+	std::string VertexSource;
+	std::string FragmentSource;
+	unsigned int program;
+};

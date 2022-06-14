@@ -1,6 +1,27 @@
 #include "Shader.h"
 
-unsigned int SHADER::CompileShader(unsigned int type, const std::string& source)
+Shader::Shader(const std::string& filepath)
+    : filepath(filepath), program(0)
+{
+    ParseShader();
+    CreateShader();
+}
+
+Shader::~Shader()
+{
+}
+
+void Shader::UseProgram()
+{
+    glUseProgram(program);
+}
+
+void Shader::DeleteProgram()
+{
+    glDeleteProgram(program);
+}
+
+unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 {
     unsigned int id = glCreateShader(type);
     const char* src = source.c_str();
@@ -15,7 +36,7 @@ unsigned int SHADER::CompileShader(unsigned int type, const std::string& source)
         char* message = new char[length];
 
         glGetShaderInfoLog(id, length, &length, message);
-        std::cout << "Failed to compile " << 
+        std::cout << "Failed to compile " <<
             (type == GL_VERTEX_SHADER ? "vertex" : "fragment")
             << " shader." << std::endl;
         std::cout << message << std::endl;
@@ -29,11 +50,11 @@ unsigned int SHADER::CompileShader(unsigned int type, const std::string& source)
     return id;
 }
 
-unsigned int SHADER::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
+void Shader::CreateShader()
 {
-    unsigned int program = glCreateProgram();
-    unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
-    unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
+    program = glCreateProgram();
+    unsigned int vs = CompileShader(GL_VERTEX_SHADER, VertexSource);
+    unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, FragmentSource);
 
     glAttachShader(program, vs);
     glAttachShader(program, fs);
@@ -42,11 +63,9 @@ unsigned int SHADER::CreateShader(const std::string& vertexShader, const std::st
 
     glDeleteShader(vs);
     glDeleteShader(fs);
-
-    return program;
 }
 
-SHADER::ShaderProgramSource SHADER::ParseShader(const std::string& filepath)
+void Shader::ParseShader()
 {
     std::ifstream stream(filepath);
 
@@ -69,9 +88,9 @@ SHADER::ShaderProgramSource SHADER::ParseShader(const std::string& filepath)
                 type = ShaderType::FRAGMENT;
         }
         else
-           ss[(int)type] << line << "\n";
+            ss[(int)type] << line << "\n";
     }
 
-    return { ss[0].str() , ss[1].str() };
-
+    VertexSource = ss[int(ShaderType::VERTEX)].str();
+    FragmentSource = ss[int(ShaderType::FRAGMENT)].str();
 }

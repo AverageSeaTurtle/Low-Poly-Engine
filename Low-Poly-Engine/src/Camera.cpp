@@ -1,6 +1,5 @@
 #include "Camera.h"
 
-#include <GLFW/glfw3.h>
 
 Camera::Camera()
 {
@@ -17,5 +16,6 @@ void Camera::Update()
 
 void Camera::SetCamera()
 {
-	
+
 }
+

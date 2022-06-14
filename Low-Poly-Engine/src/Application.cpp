@@ -29,18 +29,22 @@ void Application::Loop()
 		Display(0, GetWindowHeight() / 2, GetWindowWidth() / 2, GetWindowHeight() / 2));
 
 	/* Set up Basic Shader */
-	SHADER::ShaderProgramSource source = SHADER::ParseShader("res/shaders/Basic.shader");
-	unsigned int shader = SHADER::CreateShader(source.VertexSource, source.FragmentSource);
-	glUseProgram(shader);
+	//SHADER::ShaderProgramSource source = SHADER::ParseShader("res/shaders/Basic.shader");
+	//unsigned int shader = SHADER::CreateShader(source.VertexSource, source.FragmentSource);
+	//glUseProgram(shader);
 
 	//int shader_color = glGetUniformLocation(shader, "u_Color");
+
+	Shader shader("res/shaders/Basic.shader");
+	shader.UseProgram();
 
 	while (!glfwWindowShouldClose(this->window)) {
 		this->Update();
 		this->Render();
 	}
 
-	glDeleteProgram(shader);
+	shader.DeleteProgram();
+	//glDeleteProgram(shader);
 }
 
 void Application::Update()
@@ -53,7 +57,7 @@ void Application::Render()
 {
 	/* Render here */
 	glClear(GL_COLOR_BUFFER_BIT);
-	//glClearColor(background_color);
+	glClearColor(background_color);
 
 	for (auto& d : displays) {
 		d.SetDisplay();

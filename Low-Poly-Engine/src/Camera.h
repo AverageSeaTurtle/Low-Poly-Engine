@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Node.h"
+#include <GLFW/glfw3.h>
 
 class Camera : public Node
 {
