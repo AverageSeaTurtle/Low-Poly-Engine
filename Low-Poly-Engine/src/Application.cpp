@@ -39,6 +39,7 @@ void Application::Loop()
 	shader.UseProgram();
 
 	while (!glfwWindowShouldClose(this->window)) {
+		shader.SetVec4("u_Color", YELLOW.vec4());
 		this->Update();
 		this->Render();
 	}

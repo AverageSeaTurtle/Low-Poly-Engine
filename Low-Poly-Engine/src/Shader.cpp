@@ -21,6 +21,11 @@ void Shader::DeleteProgram()
     glDeleteProgram(program);
 }
 
+void Shader::SetVec4(const std::string& name, const glm::vec4& value)
+{
+    glUniform4f(glGetUniformLocation(program, name.c_str()), value.x, value.y, value.z, value.w);
+}
+
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 {
     unsigned int id = glCreateShader(type);
