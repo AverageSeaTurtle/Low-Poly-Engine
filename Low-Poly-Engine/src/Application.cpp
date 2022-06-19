@@ -28,23 +28,11 @@ void Application::Loop()
 	displays.push_back(
 		Display(0, GetWindowHeight() / 2, GetWindowWidth() / 2, GetWindowHeight() / 2));
 
-	/* Set up Basic Shader */
-	//SHADER::ShaderProgramSource source = SHADER::ParseShader("res/shaders/Basic.shader");
-	//unsigned int shader = SHADER::CreateShader(source.VertexSource, source.FragmentSource);
-	//glUseProgram(shader);
-
-	//int shader_color = glGetUniformLocation(shader, "u_Color");
-
-	Shader shader("res/shaders/Basic.shader");
-	shader.UseProgram();
-
 	while (!glfwWindowShouldClose(this->window)) {
 		this->Update();
 		this->Render();
 	}
 
-	shader.DeleteProgram();
-	//glDeleteProgram(shader);
 }
 
 void Application::Update()
@@ -59,20 +47,35 @@ void Application::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(background_color);
 
-	for (auto& d : displays) {
-		d.SetDisplay();
+	Shader shader("res/shaders/Basic.shader");
+
+	shader.UseProgram();
+
+	for (int i = 0; i < displays.size();i++) {
+		displays[i].SetDisplay();
+
+		if(i == 0)
+			shader.SetVec4("u_Color", BLACK.vec4());
+		else if(i == 1)
+			shader.SetVec4("u_Color", GREEN.vec4());
+		else if(i == 2)
+			shader.SetVec4("u_Color", BLUE.vec4());
+		else if(i == 3)
+			shader.SetVec4("u_Color", RED.vec4());
 
 		/* ---- Draw here ---- */
 		glBegin(GL_TRIANGLES);
 
 		glVertex2f(-0.5f, -0.5f);
 		glVertex2f(0.0f, 0.5f);
-		glVertex2f(0.5f, -0.5f);
+		glVertex2f(0.5f, -0.5f);	
 
 		glEnd();
 		/* ------------------- */
 
+
 	}
+
 
 	/* Swap front and back buffers */
 	glfwSwapBuffers(this->window);

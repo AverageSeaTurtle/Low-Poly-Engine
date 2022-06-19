@@ -18,6 +18,8 @@ https://youtu.be/2pv0Fbo-7ms
 #include <fstream>
 #include <sstream>
 
+#include <glm/vec4.hpp>
+
 class Shader
 {
 public:
@@ -29,6 +31,9 @@ public:
 	void DeleteProgram();
 
 	unsigned int getProgram() const { return program; }
+		
+	void SetVec4(const std::string& name, const glm::vec4& value);
+
 
 private:
 
