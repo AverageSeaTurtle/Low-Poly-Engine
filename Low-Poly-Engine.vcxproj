@@ -124,11 +124,13 @@
     <ClCompile Include="Low-Poly-Engine\src\Camera.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Color.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Display.cpp" />
+    <ClCompile Include="Low-Poly-Engine\src\Indexbuffer.cpp" />
     <ClCompile Include="low-poly-engine\src\Main.cpp" />
     <ClCompile Include="low-poly-engine\src\Node.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\OpenglError.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Shader.cpp" />
     <ClCompile Include="low-poly-engine\src\Vector3D.cpp" />
+    <ClCompile Include="Low-Poly-Engine\src\Vertexbuffer.cpp" />
     <ClCompile Include="low-poly-engine\src\Viewport.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +140,9 @@
     <ClInclude Include="dependencies\glew\include\gl\wglew.h" />
     <ClInclude Include="dependencies\glfw\include\glfw\glfw3.h" />
     <ClInclude Include="dependencies\glfw\include\glfw\glfw3native.h" />
+    <ClInclude Include="Low-Poly-Engine\src\Indexbuffer.h" />
     <ClInclude Include="Low-Poly-Engine\src\OpenglError.h" />
+    <ClInclude Include="Low-Poly-Engine\src\Renderer.h" />
     <ClInclude Include="Low-Poly-Engine\src\Shader.h" />
     <ClInclude Include="low-poly-engine\src\Application.h" />
     <ClInclude Include="low-poly-engine\src\Camera.h" />
@@ -146,6 +150,7 @@
     <ClInclude Include="Low-Poly-Engine\src\Display.h" />
     <ClInclude Include="low-poly-engine\src\Node.h" />
     <ClInclude Include="low-poly-engine\src\Vector3D.h" />
+    <ClInclude Include="Low-Poly-Engine\src\Vertexbuffer.h" />
     <ClInclude Include="low-poly-engine\src\Viewport.h" />
   </ItemGroup>
   <ItemGroup>

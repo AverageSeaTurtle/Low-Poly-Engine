@@ -45,6 +45,12 @@
     <ClCompile Include="Low-Poly-Engine\src\OpenglError.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Low-Poly-Engine\src\Vertexbuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Low-Poly-Engine\src\Indexbuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dependencies\glew\include\gl\eglew.h">
@@ -90,6 +96,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Low-Poly-Engine\src\OpenglError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Low-Poly-Engine\src\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Low-Poly-Engine\src\Vertexbuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Low-Poly-Engine\src\Indexbuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
