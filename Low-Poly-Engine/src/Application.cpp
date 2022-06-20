@@ -6,6 +6,7 @@
 #include "OpenglError.h"
 #include "Vertexbuffer.h"
 #include "Indexbuffer.h"
+#include "Vertexarray.h"
 
 Application::Application(int window_width, int window_height, std::string title)
 	: window_width(window_width), window_height(window_height), title(title), window(nullptr)
@@ -44,30 +45,27 @@ void Application::Loop()
 		2, 3, 0
 	};
 
-	
 	/* Vertex Array */
-	unsigned int vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
+	VertexArray vao;
 	/* Vertex Buffer */
 	VertexBuffer vbo(positions, 8 * sizeof(float));
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+	VertexBufferLayout layout;
+	layout.Push<float>(2);
+	vao.AddBuffer(vbo, layout);
 
 	/* Index Buffer */
 	IndexBuffer ibo(indexes, 6);
 
-	/* Bind Buffers and Vertex Array */
+	/* Unbind Buffers and Vertex Array */
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	while (!glfwWindowShouldClose(this->window)) {
 
-		glBindVertexArray(vao);
 		ibo.Bind();
+		vao.Bind();
 
 		this->Update();
 		this->Render();

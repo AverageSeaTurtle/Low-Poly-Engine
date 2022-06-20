@@ -51,6 +51,9 @@
     <ClCompile Include="Low-Poly-Engine\src\Indexbuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Low-Poly-Engine\src\Vertexarray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dependencies\glew\include\gl\eglew.h">
@@ -105,6 +108,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Low-Poly-Engine\src\Indexbuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Low-Poly-Engine\src\Vertexarray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Low-Poly-Engine\src\VertexbufferLayout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

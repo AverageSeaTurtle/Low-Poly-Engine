@@ -130,6 +130,7 @@
     <ClCompile Include="Low-Poly-Engine\src\OpenglError.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Shader.cpp" />
     <ClCompile Include="low-poly-engine\src\Vector3D.cpp" />
+    <ClCompile Include="Low-Poly-Engine\src\Vertexarray.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Vertexbuffer.cpp" />
     <ClCompile Include="low-poly-engine\src\Viewport.cpp" />
   </ItemGroup>
@@ -150,7 +151,9 @@
     <ClInclude Include="Low-Poly-Engine\src\Display.h" />
     <ClInclude Include="low-poly-engine\src\Node.h" />
     <ClInclude Include="low-poly-engine\src\Vector3D.h" />
+    <ClInclude Include="Low-Poly-Engine\src\Vertexarray.h" />
     <ClInclude Include="Low-Poly-Engine\src\Vertexbuffer.h" />
+    <ClInclude Include="Low-Poly-Engine\src\VertexbufferLayout.h" />
     <ClInclude Include="low-poly-engine\src\Viewport.h" />
   </ItemGroup>
   <ItemGroup>
