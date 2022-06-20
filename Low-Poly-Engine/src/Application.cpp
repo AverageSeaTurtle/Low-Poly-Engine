@@ -3,6 +3,8 @@
 #include <iostream>
 #include "Shader.h"
 
+#include "OpenglError.h"
+
 Application::Application(int window_width, int window_height, std::string title)
 	: window_width(window_width), window_height(window_height), title(title), window(nullptr)
 {
@@ -40,6 +42,12 @@ void Application::Loop()
 		2, 3, 0
 	};
 
+
+	/* Vertex Array */
+	unsigned int vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
 	/* Vertex Buffer */
 	unsigned int buffer;
 	glGenBuffers(1, &buffer);
@@ -48,16 +56,23 @@ void Application::Loop()
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
-	/* ------------- */
 
 	/* Index Buffer */
 	unsigned int ibo;
 	glGenBuffers(1, &ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(int), indexes, GL_STATIC_DRAW);
-	/* ------------- */
-	
+
+	/* Bind Buffers and Vertex Array */
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
 	while (!glfwWindowShouldClose(this->window)) {
+
+		glBindVertexArray(vao);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+
 		this->Update();
 		this->Render();
 	}
@@ -93,6 +108,7 @@ void Application::Render()
 			shader.SetVec4("u_Color", RED.vec4());
 
 		/* ---- Draw here ---- */
+
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
 		/* ------------------- */
@@ -111,6 +127,11 @@ bool Application::Init()
 	/* Initialize Glfw */
 	if (!glfwInit())
 		return false;
+
+	/* Set GLFW Version */
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	/* Create a windowed mode window and its OpenGL context */
 	this->window = glfwCreateWindow(window_width, window_height, title.c_str(), NULL, NULL);
