@@ -27,8 +27,8 @@ public:
 	Shader(const std::string& filepath);
 	~Shader();
 
-	void UseProgram();
-	void DeleteProgram();
+	void UseProgram() const;
+	void DeleteProgram() const;
 
 	unsigned int getProgram() const { return program; }
 		

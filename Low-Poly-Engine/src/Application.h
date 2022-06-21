@@ -27,7 +27,6 @@ public:
 
 private:
 	void Update();
-	void Render();
 
 	GLFWwindow* window;
 	int window_width, window_height;

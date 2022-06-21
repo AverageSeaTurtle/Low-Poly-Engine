@@ -11,12 +11,12 @@ Shader::~Shader()
 {
 }
 
-void Shader::UseProgram()
+void Shader::UseProgram() const
 {
     glUseProgram(program);
 }
 
-void Shader::DeleteProgram()
+void Shader::DeleteProgram() const
 {
     glDeleteProgram(program);
 }

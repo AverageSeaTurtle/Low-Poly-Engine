@@ -128,6 +128,7 @@
     <ClCompile Include="low-poly-engine\src\Main.cpp" />
     <ClCompile Include="low-poly-engine\src\Node.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\OpenglError.cpp" />
+    <ClCompile Include="Low-Poly-Engine\src\Renderer.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Shader.cpp" />
     <ClCompile Include="low-poly-engine\src\Vector3D.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Vertexarray.cpp" />
