@@ -5,6 +5,7 @@
 
 #include "OpenglError.h"
 #include "Renderer.h"
+#include "Objectbuffer.h"
 
 Application::Application(int window_width, int window_height, std::string title)
 	: window_width(window_width), window_height(window_height), title(title), window(nullptr)
@@ -31,37 +32,9 @@ void Application::Loop()
 	displays.push_back(
 		Display(0, GetWindowHeight() / 2, GetWindowWidth() / 2, GetWindowHeight() / 2));
 
-	float positions[8] = {
-		-0.5f, -0.5f,
-		 0.5f, -0.5f,
-		 0.5f,  0.5f,
-		-0.5f,  0.5f
-	};
-
-	unsigned int indexes[] = {
-		0, 1, 2,
-		2, 3, 0
-	};
-
-	/* Vertex Array */
-	VertexArray vao;
-	/* Vertex Buffer */
-	VertexBuffer vbo(positions, 8 * sizeof(float));
-
-	VertexBufferLayout layout;
-	layout.Push<float>(2);
-	vao.AddBuffer(vbo, layout);
-
-	/* Index Buffer */
-	IndexBuffer ibo(indexes, 6);
-
-	/* Unbind Buffers and Vertex Array */
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	ObjectBuffer obj("res/objects/square.obj");
 
 	Renderer renderer;
-
 	Shader shader("res/shaders/Basic.shader");
 	shader.UseProgram();
 
@@ -82,7 +55,7 @@ void Application::Loop()
 			else if(i == 3)
 				shader.SetVec4("u_Color", BLUE.vec4());
 
-			renderer.Draw(vao, ibo, shader);
+			renderer.Draw(obj, shader);
 		}
 
 		/* Swap front and back buffers */
@@ -90,6 +63,7 @@ void Application::Loop()
 
 		/* Poll for and process events */
 		glfwPollEvents();
+
 	}
 
 }

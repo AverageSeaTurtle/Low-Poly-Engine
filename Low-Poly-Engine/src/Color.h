@@ -49,7 +49,7 @@ namespace COLOR
 		RGB_f operator + (const RGB_f& other);
 		RGB_f operator - (const RGB_f& other);
 
-		glm::vec4 vec4() { return glm::vec4(r, g, b, alpha); };
+		glm::vec4 vec4() { return glm::vec4(r, g, b, alpha); }
 
 		RGB_f operator += (const RGB_f& other);
 		RGB_f operator -= (const RGB_f& other);

@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "OpenglError.h"
 
 void Renderer::Draw(const VertexArray& vao, const IndexBuffer& ibo, const Shader& shader) const
 {
@@ -7,6 +8,14 @@ void Renderer::Draw(const VertexArray& vao, const IndexBuffer& ibo, const Shader
 	ibo.Bind();
 
 	glDrawElements(GL_TRIANGLES, ibo.GetCount(), GL_UNSIGNED_INT, nullptr);
+}
+
+void Renderer::Draw(const ObjectBuffer& obj, const Shader& shader) const
+{
+	shader.UseProgram();
+	obj.Bind();
+
+	glDrawElements(GL_TRIANGLES, obj.GetIndexBuffer().GetCount(), GL_UNSIGNED_INT, nullptr);
 }
 
 void Renderer::Clear() const

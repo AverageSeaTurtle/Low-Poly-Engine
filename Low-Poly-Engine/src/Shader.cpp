@@ -1,5 +1,7 @@
 #include "Shader.h"
 
+#include "OpenglError.h"
+
 Shader::Shader(const std::string& filepath)
     : filepath(filepath), program(0)
 {
@@ -23,7 +25,9 @@ void Shader::DeleteProgram() const
 
 void Shader::SetVec4(const std::string& name, const glm::vec4& value)
 {
+    GLERROR::GLClearError();
     glUniform4f(glGetUniformLocation(program, name.c_str()), value.x, value.y, value.z, value.w);
+    GLERROR::GLCheckError();
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source)

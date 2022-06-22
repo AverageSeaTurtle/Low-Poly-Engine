@@ -127,6 +127,7 @@
     <ClCompile Include="Low-Poly-Engine\src\Indexbuffer.cpp" />
     <ClCompile Include="low-poly-engine\src\Main.cpp" />
     <ClCompile Include="low-poly-engine\src\Node.cpp" />
+    <ClCompile Include="Low-Poly-Engine\src\Objectbuffer.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\OpenglError.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Renderer.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Shader.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="dependencies\glfw\include\glfw\glfw3.h" />
     <ClInclude Include="dependencies\glfw\include\glfw\glfw3native.h" />
     <ClInclude Include="Low-Poly-Engine\src\Indexbuffer.h" />
+    <ClInclude Include="Low-Poly-Engine\src\Objectbuffer.h" />
     <ClInclude Include="Low-Poly-Engine\src\OpenglError.h" />
     <ClInclude Include="Low-Poly-Engine\src\Renderer.h" />
     <ClInclude Include="Low-Poly-Engine\src\Shader.h" />
