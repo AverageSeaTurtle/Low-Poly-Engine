@@ -3,8 +3,8 @@
 #include <GLFW/glfw3.h>
 #include <glm/vec4.hpp>
 
-#define glClearColor(COLOR) glClearColor(COLOR.r, COLOR.g, COLOR.b, COLOR.alpha);
-#define glColor3f(COLOR) glColor3f(COLOR.r, COLOR.g, COLOR.b);
+//#define glClearColor(COLOR) glClearColor(COLOR.r, COLOR.g, COLOR.b, COLOR.alpha);
+//#define glColor3f(COLOR) glColor3f(COLOR.r, COLOR.g, COLOR.b);
 
 #define WHITE COLOR::RGB_f(1.0,1.0,1.0,1.0)
 #define BLACK COLOR::RGB_f(0.0,0.0,0.0,1.0)
@@ -49,7 +49,7 @@ namespace COLOR
 		RGB_f operator + (const RGB_f& other);
 		RGB_f operator - (const RGB_f& other);
 
-		glm::vec4 vec4() { return glm::vec4(r, g, b, alpha); };
+		glm::vec4 vec4() { return glm::vec4(r, g, b, alpha); }
 
 		RGB_f operator += (const RGB_f& other);
 		RGB_f operator -= (const RGB_f& other);

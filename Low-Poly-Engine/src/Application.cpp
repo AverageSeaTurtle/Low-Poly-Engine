@@ -3,6 +3,10 @@
 #include <iostream>
 #include "Shader.h"
 
+#include "OpenglError.h"
+#include "Renderer.h"
+#include "Objectbuffer.h"
+
 Application::Application(int window_width, int window_height, std::string title)
 	: window_width(window_width), window_height(window_height), title(title), window(nullptr)
 {
@@ -28,9 +32,38 @@ void Application::Loop()
 	displays.push_back(
 		Display(0, GetWindowHeight() / 2, GetWindowWidth() / 2, GetWindowHeight() / 2));
 
+	ObjectBuffer obj("res/objects/square.obj");
+
+	Renderer renderer;
+	Shader shader("res/shaders/Basic.shader");
+	shader.UseProgram();
+
 	while (!glfwWindowShouldClose(this->window)) {
-		this->Update();
-		this->Render();
+
+		/* Render here */
+		renderer.Clear(background_color);
+
+		for (int i = 0; i < displays.size(); i++) {
+			displays[i].SetDisplay();
+
+			if(i == 0)
+				shader.SetVec4("u_Color", RED.vec4());
+			else if(i == 1)
+				shader.SetVec4("u_Color", GREEN.vec4());
+			else if(i == 2)
+				shader.SetVec4("u_Color", YELLOW.vec4());
+			else if(i == 3)
+				shader.SetVec4("u_Color", BLUE.vec4());
+
+			renderer.Draw(obj, shader);
+		}
+
+		/* Swap front and back buffers */
+		glfwSwapBuffers(this->window);
+
+		/* Poll for and process events */
+		glfwPollEvents();
+
 	}
 
 }
@@ -41,54 +74,16 @@ void Application::Update()
 
 }
 
-void Application::Render()
-{
-	/* Render here */
-	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(background_color);
-
-	Shader shader("res/shaders/Basic.shader");
-
-	shader.UseProgram();
-
-	for (int i = 0; i < displays.size();i++) {
-		displays[i].SetDisplay();
-
-		if(i == 0)
-			shader.SetVec4("u_Color", BLACK.vec4());
-		else if(i == 1)
-			shader.SetVec4("u_Color", GREEN.vec4());
-		else if(i == 2)
-			shader.SetVec4("u_Color", BLUE.vec4());
-		else if(i == 3)
-			shader.SetVec4("u_Color", RED.vec4());
-
-		/* ---- Draw here ---- */
-		glBegin(GL_TRIANGLES);
-
-		glVertex2f(-0.5f, -0.5f);
-		glVertex2f(0.0f, 0.5f);
-		glVertex2f(0.5f, -0.5f);	
-
-		glEnd();
-		/* ------------------- */
-
-
-	}
-
-
-	/* Swap front and back buffers */
-	glfwSwapBuffers(this->window);
-
-	/* Poll for and process events */
-	glfwPollEvents();
-}
-
 bool Application::Init()
 {
 	/* Initialize Glfw */
 	if (!glfwInit())
 		return false;
+
+	/* Set GLFW Version */
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	/* Create a windowed mode window and its OpenGL context */
 	this->window = glfwCreateWindow(window_width, window_height, title.c_str(), NULL, NULL);
