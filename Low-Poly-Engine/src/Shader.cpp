@@ -25,9 +25,18 @@ void Shader::DeleteProgram() const
 
 void Shader::SetVec4(const std::string& name, const glm::vec4& value)
 {
-    GLERROR::GLClearError();
-    glUniform4f(glGetUniformLocation(program, name.c_str()), value.x, value.y, value.z, value.w);
-    GLERROR::GLCheckError();
+    glUniform4f(
+        glGetUniformLocation(program, name.c_str()),
+        value.x, value.y, value.z, value.w
+    );
+}
+
+void Shader::SetMat4(const std::string& name, const glm::mat4& value)
+{
+    glUniformMatrix4fv(
+        glGetUniformLocation(program, name.c_str()),
+        1, GL_FALSE, glm::value_ptr(value)
+    );
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source)

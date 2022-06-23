@@ -7,6 +7,10 @@
 #include "Renderer.h"
 #include "Objectbuffer.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 Application::Application(int window_width, int window_height, std::string title)
 	: window_width(window_width), window_height(window_height), title(title), window(nullptr)
 {
@@ -21,25 +25,24 @@ Application::~Application()
 void Application::Loop()
 {
 	displays.push_back(
-		Display(0, 0, GetWindowWidth() / 2, GetWindowHeight() / 2));
+		Display(0, 0, GetWindowWidth(), GetWindowHeight()) );
 
-	displays.push_back(
-		Display(GetWindowWidth() / 2, GetWindowHeight() / 2, GetWindowWidth() / 2, GetWindowHeight() / 2));
-
-	displays.push_back(
-		Display(GetWindowWidth() / 2, 0, GetWindowWidth() / 2, GetWindowHeight() / 2));
-
-	displays.push_back(
-		Display(0, GetWindowHeight() / 2, GetWindowWidth() / 2, GetWindowHeight() / 2));
-
-	ObjectBuffer obj("res/objects/square.obj");
+	ObjectBuffer obj("res/objects/car.obj");
 
 	Renderer renderer;
 	Shader shader("res/shaders/Basic.shader");
 	shader.UseProgram();
 
+	glm::mat4 trans = glm::mat4(1.0f);
+
+	float rotation = 0;
+
 	while (!glfwWindowShouldClose(this->window)) {
 
+		rotation += 1.0f;
+		if (rotation > 360)
+			rotation = 0;
+		
 		/* Render here */
 		renderer.Clear(background_color);
 
@@ -55,6 +58,11 @@ void Application::Loop()
 			else if(i == 3)
 				shader.SetVec4("u_Color", BLUE.vec4());
 
+			trans = glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 1.0f, 1.0f));
+			trans = glm::scale(trans, glm::vec3(0.001f, 0.001f, 0.001f));
+
+			shader.SetMat4("transform", trans);
+
 			renderer.Draw(obj, shader);
 		}
 
@@ -63,9 +71,7 @@ void Application::Loop()
 
 		/* Poll for and process events */
 		glfwPollEvents();
-
 	}
-
 }
 
 void Application::Update()

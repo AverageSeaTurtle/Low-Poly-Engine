@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    Application App(640, 400, "Low-Poly Sandbox");
+    Application App(500, 500, "Low-Poly Sandbox");
     if (!App.Init())
         return -1;
 

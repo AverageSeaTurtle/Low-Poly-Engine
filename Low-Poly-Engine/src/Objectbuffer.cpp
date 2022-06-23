@@ -76,9 +76,9 @@ void ObjectBuffer::ParseObject()
 		else if (input.compare("f") == 0) {
 			for (int i = 0; i < 3; i++) {
 				stream >> input;
-				m_v_indices.push_back(ReadFace(input));
-				m_vt_indices.push_back(ReadFace(input));
-				m_vn_indices.push_back(ReadFace(input));
+				m_v_indices.push_back(ReadFace(input) - 1);
+				m_vt_indices.push_back(ReadFace(input) - 1);
+				m_vn_indices.push_back(ReadFace(input) - 1);
 			}
 		}
 	}
