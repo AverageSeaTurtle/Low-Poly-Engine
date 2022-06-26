@@ -37,34 +37,34 @@ void Application::Loop()
 
 	float rotation = 0;
 
+	float x = 0;
+
+
 	while (!glfwWindowShouldClose(this->window)) {
 
 		rotation += 1.0f;
 		if (rotation > 360)
 			rotation = 0;
+
+		x += 10;
+		if (x > 1200)
+			x = -1200;
 		
 		/* Render here */
 		renderer.Clear(background_color);
 
-		for (int i = 0; i < displays.size(); i++) {
-			displays[i].SetDisplay();
+		displays[0].SetDisplay();
+		shader.SetVec4("u_Color", RED.vec4());
 
-			if(i == 0)
-				shader.SetVec4("u_Color", RED.vec4());
-			else if(i == 1)
-				shader.SetVec4("u_Color", GREEN.vec4());
-			else if(i == 2)
-				shader.SetVec4("u_Color", YELLOW.vec4());
-			else if(i == 3)
-				shader.SetVec4("u_Color", BLUE.vec4());
+		trans = glm::mat4(1.0f);
+		trans = glm::scale(trans, glm::vec3(0.001f, 0.001f, 0.001f));
+		trans = glm::translate(trans, glm::vec3(x, 0.0f, 0.0f));
+		trans = glm::rotate(trans, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 1.0f));
 
-			trans = glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 1.0f, 1.0f));
-			trans = glm::scale(trans, glm::vec3(0.001f, 0.001f, 0.001f));
 
-			shader.SetMat4("transform", trans);
+		shader.SetMat4("transform", trans);
 
-			renderer.Draw(obj, shader);
-		}
+		renderer.Draw(obj, shader);
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(this->window);
