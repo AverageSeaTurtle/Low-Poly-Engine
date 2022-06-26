@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <string>
+#include <glm/glm.hpp>
 
 class ObjectBuffer
 {
@@ -16,25 +17,28 @@ public:
 
 	void Bind() const;
 
-	const IndexBuffer& GetIndexBuffer() const { return m_ibo; }
+	const IndexBuffer& GetIndexBuffer() const { return m_indexBuffer; }
 
 private:
 	void ParseObject();
 
 	static unsigned int ReadFace(std::string& input);
 
-	IndexBuffer m_ibo;
-	VertexArray m_vao;
-	VertexBuffer m_vbo;
+	IndexBuffer m_indexBuffer;
+	VertexArray m_vertexArray;
+	VertexBuffer m_vertexBuffer;
 
-	std::vector<float> m_vertices;
-	std::vector<unsigned int> m_v_indices;
+	/* Positions */
+	std::vector<float> m_vertexPositions;
+	std::vector<unsigned int> m_indexPositions;
 
-	std::vector<float> m_vtextures;
-	std::vector<unsigned int> m_vt_indices;
+	/* Texture */
+	std::vector<float> m_vertexTextures;
+	std::vector<unsigned int> m_indexTextures;
 
-	std::vector<float> m_vnormals;
-	std::vector<unsigned int> m_vn_indices;
+	/* Normals */
+	std::vector<float> m_vertexNormals;
+	std::vector<unsigned int> m_indexNormals;
 
 	std::string m_filepath;
 };

@@ -61,7 +61,6 @@ void Application::Loop()
 		trans = glm::translate(trans, glm::vec3(x, 0.0f, 0.0f));
 		trans = glm::rotate(trans, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 1.0f));
 
-
 		shader.SetMat4("transform", trans);
 
 		renderer.Draw(obj, shader);
