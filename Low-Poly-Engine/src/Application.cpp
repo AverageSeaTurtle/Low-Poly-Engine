@@ -6,6 +6,7 @@
 #include "OpenglError.h"
 #include "Renderer.h"
 #include "Objectbuffer.h"
+#include "Mesh.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -27,7 +28,7 @@ void Application::Loop()
 	displays.push_back(
 		Display(0, 0, GetWindowWidth(), GetWindowHeight()) );
 
-	ObjectBuffer obj("res/objects/car.obj");
+	Mesh mesh("res/objects/car.obj");
 
 	Renderer renderer;
 	Shader shader("res/shaders/Basic.shader");
@@ -63,7 +64,7 @@ void Application::Loop()
 
 		shader.SetMat4("transform", trans);
 
-		renderer.Draw(obj, shader);
+		renderer.Draw(mesh, shader);
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(this->window);

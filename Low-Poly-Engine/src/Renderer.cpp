@@ -18,6 +18,14 @@ void Renderer::Draw(const ObjectBuffer& obj, const Shader& shader) const
 	glDrawElements(GL_TRIANGLES, obj.GetIndexBuffer().GetCount(), GL_UNSIGNED_INT, nullptr);
 }
 
+void Renderer::Draw(const Mesh& mesh, const Shader& shader) const
+{
+	shader.UseProgram();
+	mesh.Bind();
+
+	glDrawElements(GL_TRIANGLES, mesh.GetIndexBuffer().GetCount(), GL_UNSIGNED_INT, nullptr);
+}
+
 void Renderer::Clear() const
 {
 	glClear(GL_COLOR_BUFFER_BIT);

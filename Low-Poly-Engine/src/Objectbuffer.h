@@ -28,6 +28,8 @@ private:
 	VertexArray m_vertexArray;
 	VertexBuffer m_vertexBuffer;
 
+	std::vector<unsigned int>  m_elements;
+
 	/* Positions */
 	std::vector<float> m_vertexPositions;
 	std::vector<unsigned int> m_indexPositions;

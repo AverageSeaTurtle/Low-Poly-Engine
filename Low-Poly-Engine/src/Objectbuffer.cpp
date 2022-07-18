@@ -19,6 +19,7 @@ ObjectBuffer::~ObjectBuffer()
 
 void ObjectBuffer::Load()
 {
+
 	/* Set Vertex Buffer*/
 	m_vertexBuffer.SetData(&m_vertexPositions[0], m_vertexPositions.size() * sizeof(float));
 
@@ -28,7 +29,7 @@ void ObjectBuffer::Load()
 	m_vertexArray.AddBuffer(m_vertexBuffer, layout);
 
 	/* Load data to IndexBuffer */
-	m_indexBuffer.SetData(&m_indexPositions[0], m_indexPositions.size());
+	//m_indexBuffer.SetData(&m_indexPositions[0], m_indexPositions.size());
 }
 
 void ObjectBuffer::Bind() const
