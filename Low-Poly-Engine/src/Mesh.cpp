@@ -18,16 +18,20 @@ Mesh::~Mesh()
 void Mesh::Load()
 {
 	std::vector<Vertex> vertices;
+	std::vector<GLint> indices;
 
-	vertices.resize(m_vertex_position_indicies.size(), Vertex());
+	Vertex tempVertex;
+	for (int i = 0; i < m_vertex_position_indicies.size() /* number of faces*/; i++) {
+		tempVertex.position = m_vertex_positions[m_vertex_position_indicies[i]];
+		tempVertex.color = glm::vec3(1.f, 1.f, 1.f);
+		tempVertex.texcoord = m_vertex_texcoords[m_vertex_texcoord_indicies[i]];
+		tempVertex.normal = m_vertex_normals[m_vertex_normal_indicies[i]];
 
-	for (int i = 0; i < vertices.size(); i++) {
-		vertices[m_vertex_position_indicies[i]].position = m_vertex_positions[m_vertex_position_indicies[i]];
-		vertices[m_vertex_position_indicies[i]].color = glm::vec3(1.f, 1.f, 1.f);
-		vertices[m_vertex_position_indicies[i]].texcoord = m_vertex_texcoords[m_vertex_texcoord_indicies[i]];
-		vertices[m_vertex_position_indicies[i]].normal = m_vertex_normals[m_vertex_normal_indicies[i]];
+		vertices.push_back(tempVertex);
+		indices.push_back(i);
 	}
 
+	// Set the layout of the vertexbuffer
 	VertexBufferLayout layout;
 	layout.Push<float>(3);
 	layout.Push<float>(3);
@@ -36,7 +40,7 @@ void Mesh::Load()
 
 	m_vertexbuffer.SetData(&vertices[0], vertices.size() * sizeof(Vertex));
 	m_vertexarray.AddBuffer(m_vertexbuffer, layout);
-	m_indexbuffer.SetData(&m_vertex_position_indicies[0], m_vertex_position_indicies.size());
+	m_indexbuffer.SetData(&indices[0], indices.size());
 }
 
 void Mesh::Bind() const

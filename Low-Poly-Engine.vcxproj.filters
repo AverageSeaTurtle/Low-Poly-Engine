@@ -57,10 +57,10 @@
     <ClCompile Include="Low-Poly-Engine\src\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Low-Poly-Engine\src\Objectbuffer.cpp">
+    <ClCompile Include="Low-Poly-Engine\src\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Low-Poly-Engine\src\Mesh.cpp">
+    <ClCompile Include="Low-Poly-Engine\src\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,13 +125,16 @@
     <ClInclude Include="Low-Poly-Engine\src\VertexbufferLayout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Low-Poly-Engine\src\Objectbuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Low-Poly-Engine\src\Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Low-Poly-Engine\src\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Low-Poly-Engine\src\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Low-Poly-Engine\src\stb_image\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

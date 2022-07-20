@@ -5,8 +5,8 @@
 
 #include "OpenglError.h"
 #include "Renderer.h"
-#include "Objectbuffer.h"
 #include "Mesh.h"
+#include "Texture.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -28,7 +28,8 @@ void Application::Loop()
 	displays.push_back(
 		Display(0, 0, GetWindowWidth(), GetWindowHeight()) );
 
-	Mesh mesh("res/objects/car.obj");
+	Mesh mesh("res/objects/plane.obj");
+	Texture texture("res/textures/plane.png");
 
 	Renderer renderer;
 	Shader shader("res/shaders/Basic.shader");
@@ -36,10 +37,9 @@ void Application::Loop()
 
 	glm::mat4 trans = glm::mat4(1.0f);
 
-	float rotation = 0;
+	float rotation = 75;
 
 	float x = 0;
-
 
 	while (!glfwWindowShouldClose(this->window)) {
 
@@ -47,24 +47,24 @@ void Application::Loop()
 		if (rotation > 360)
 			rotation = 0;
 
-		x += 10;
+		/*x += 10;
 		if (x > 1200)
-			x = -1200;
+			x = -1200;*/
 		
 		/* Render here */
 		renderer.Clear(background_color);
 
 		displays[0].SetDisplay();
-		shader.SetVec4("u_Color", RED.vec4());
 
 		trans = glm::mat4(1.0f);
-		trans = glm::scale(trans, glm::vec3(0.001f, 0.001f, 0.001f));
+		trans = glm::scale(trans, glm::vec3(0.3f, 0.3f, 0.3f));
+		//trans = glm::scale(trans, glm::vec3(0.005f, 0.005f, 0.005f));
 		trans = glm::translate(trans, glm::vec3(x, 0.0f, 0.0f));
-		trans = glm::rotate(trans, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 1.0f));
+		trans = glm::rotate(trans, glm::radians(rotation), glm::vec3(1.0f, 0.1f, 0.1f));
 
 		shader.SetMat4("transform", trans);
 
-		renderer.Draw(mesh, shader);
+		renderer.Draw(mesh, texture, shader);
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(this->window);
@@ -107,6 +107,16 @@ bool Application::Init()
 	/* Initialize Glew (it needs to be initialized before a context)*/
 	if (glewInit() != GLEW_OK)
 		return false;
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glEnable(GL_CULL_FACE);
+	glFrontFace(GL_CW);
+	glCullFace(GL_BACK);
+	
+	glClearDepth(1.0f);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
 
 	return true;
 

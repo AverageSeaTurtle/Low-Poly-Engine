@@ -128,10 +128,10 @@
     <ClCompile Include="low-poly-engine\src\Main.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Mesh.cpp" />
     <ClCompile Include="low-poly-engine\src\Node.cpp" />
-    <ClCompile Include="Low-Poly-Engine\src\Objectbuffer.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\OpenglError.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Renderer.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Shader.cpp" />
+    <ClCompile Include="Low-Poly-Engine\src\Texture.cpp" />
     <ClCompile Include="low-poly-engine\src\Vector3D.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Vertexarray.cpp" />
     <ClCompile Include="Low-Poly-Engine\src\Vertexbuffer.cpp" />
@@ -146,7 +146,6 @@
     <ClInclude Include="dependencies\glfw\include\glfw\glfw3native.h" />
     <ClInclude Include="Low-Poly-Engine\src\Indexbuffer.h" />
     <ClInclude Include="Low-Poly-Engine\src\Mesh.h" />
-    <ClInclude Include="Low-Poly-Engine\src\Objectbuffer.h" />
     <ClInclude Include="Low-Poly-Engine\src\OpenglError.h" />
     <ClInclude Include="Low-Poly-Engine\src\Renderer.h" />
     <ClInclude Include="Low-Poly-Engine\src\Shader.h" />
@@ -155,6 +154,8 @@
     <ClInclude Include="Low-Poly-Engine\src\Color.h" />
     <ClInclude Include="Low-Poly-Engine\src\Display.h" />
     <ClInclude Include="low-poly-engine\src\Node.h" />
+    <ClInclude Include="Low-Poly-Engine\src\stb_image\stb_image.h" />
+    <ClInclude Include="Low-Poly-Engine\src\Texture.h" />
     <ClInclude Include="low-poly-engine\src\Vector3D.h" />
     <ClInclude Include="Low-Poly-Engine\src\Vertex.h" />
     <ClInclude Include="Low-Poly-Engine\src\Vertexarray.h" />
