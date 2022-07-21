@@ -7,6 +7,7 @@
 #include "Renderer.h"
 #include "Mesh.h"
 #include "Texture.h"
+#include "Model.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -28,8 +29,8 @@ void Application::Loop()
 	displays.push_back(
 		Display(0, 0, GetWindowWidth(), GetWindowHeight()) );
 
-	Mesh mesh("res/objects/plane.obj");
-	Texture texture("res/textures/plane.png");
+	Model model0("res/objects/plane.obj");
+	Texture texture1("res/textures/plane.png");
 
 	Renderer renderer;
 	Shader shader("res/shaders/Basic.shader");
@@ -37,34 +38,23 @@ void Application::Loop()
 
 	glm::mat4 trans = glm::mat4(1.0f);
 
-	float rotation = 75;
-
-	float x = 0;
+	float rotation = 0;
 
 	while (!glfwWindowShouldClose(this->window)) {
 
 		rotation += 1.0f;
 		if (rotation > 360)
 			rotation = 0;
-
-		/*x += 10;
-		if (x > 1200)
-			x = -1200;*/
 		
-		/* Render here */
 		renderer.Clear(background_color);
 
 		displays[0].SetDisplay();
 
 		trans = glm::mat4(1.0f);
 		trans = glm::scale(trans, glm::vec3(0.3f, 0.3f, 0.3f));
-		//trans = glm::scale(trans, glm::vec3(0.005f, 0.005f, 0.005f));
-		trans = glm::translate(trans, glm::vec3(x, 0.0f, 0.0f));
-		trans = glm::rotate(trans, glm::radians(rotation), glm::vec3(1.0f, 0.1f, 0.1f));
-
+		trans = glm::rotate(trans, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 0.2f));
 		shader.SetMat4("transform", trans);
-
-		renderer.Draw(mesh, texture, shader);
+		renderer.Draw(model0, texture1, shader);
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(this->window);

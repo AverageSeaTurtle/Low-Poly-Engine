@@ -7,6 +7,7 @@
 #include "Color.h"
 #include "Mesh.h"
 #include "Texture.h"
+#include "Model.h"
 
 class Renderer
 {
@@ -16,6 +17,7 @@ public:
 	void Draw(const VertexArray& vao, const IndexBuffer& ibo, const Shader& shader) const;
 	void Draw(const Mesh& mesh, const Shader& shader) const;
 	void Draw(const Mesh& mesh, const Texture& texture, const Shader& shader) const;
+	void Draw(const Model& model, const Texture& texture, const Shader& shader) const;
 
 	void Clear() const;
 	void Clear(const COLOR::RGB_f& color) const;

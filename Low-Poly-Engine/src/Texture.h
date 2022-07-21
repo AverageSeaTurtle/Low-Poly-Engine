@@ -7,11 +7,14 @@
 class Texture
 {
 public:
+	Texture();
 	Texture(const std::string& filepath);
 	~Texture();
 
 	void Bind(unsigned int slot = 0) const;
 	void Unbind() const;
+
+	void LoadFile(const std::string& filepath);
 
 private:
 	std::string m_filepath;

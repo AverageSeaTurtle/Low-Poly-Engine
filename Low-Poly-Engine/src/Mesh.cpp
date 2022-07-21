@@ -2,12 +2,39 @@
 
 #include <fstream>
 #include <sstream>
-#include <iostream>
+
+Mesh::Mesh(
+	std::vector<glm::vec3> vertex_positions, 
+	std::vector<glm::vec2> vertex_texcoords, 
+	std::vector<glm::vec3> vertex_normals, 
+	std::vector<GLint> vertex_position_indicies, 
+	std::vector<GLint> vertex_texcoord_indicies, 
+	std::vector<GLint> vertex_normal_indicies
+	)
+{
+	m_vertex_positions = vertex_positions;
+	m_vertex_texcoords = vertex_texcoords;
+	m_vertex_normals = vertex_normals;
+	m_vertex_position_indicies = vertex_position_indicies;
+	m_vertex_texcoord_indicies = vertex_texcoord_indicies;
+	m_vertex_normal_indicies = vertex_normal_indicies;
+	Load();
+}
+
+Mesh::Mesh(const Mesh& other)
+{
+	m_vertex_positions = other.GetVertexPositions();
+	m_vertex_texcoords = other.GetVertexTexCoords();
+	m_vertex_normals = other.GetVertexNormals();
+	m_vertex_position_indicies = other.GetVertexPositionIndices();
+	m_vertex_texcoord_indicies = other.GetVertexTexCoordIndices();
+	m_vertex_normal_indicies = other.GetVertexNormalIndices();
+	Load();
+}
 
 Mesh::Mesh(const std::string& filepath)
-	:m_filepath(filepath)
 {
-	LoadObj();
+	LoadObj(filepath);
 	Load();
 }
 
@@ -49,10 +76,10 @@ void Mesh::Bind() const
 	m_indexbuffer.Bind();
 }
 
-void Mesh::LoadObj()
+void Mesh::LoadObj(const std::string& filepath)
 {
 	/* Parses File */
-	std::ifstream stream(m_filepath);
+	std::ifstream stream(filepath);
 	std::stringstream ss;
 
 	std::string prefix;
